@@ -70,7 +70,7 @@ def prepare_data(train, is_train):
         return train_padded
 
 X_train,X_valid,y_train,y_valid = train_test_split(prepare_data(train, True)[0],prepare_data(train, True)[1] ,test_size=0.2,train_size=0.8)
-
+X_valid, X_test, y_valid, y_test = train_test_split(X_valid, y_valid ,test_size=0.5,train_size=0.5)
 model = Sequential()
 
 
@@ -110,8 +110,8 @@ def train():
 def pred():
     loaded = keras.models.load_model('./model')
     print(loaded.summary())
-    loaded.evaluate(X_valid, y_valid)
+    loaded.evaluate(X_test, y_test)
     
 
-#train()
+train()
 pred()
